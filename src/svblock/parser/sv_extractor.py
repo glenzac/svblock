@@ -184,8 +184,57 @@ def _extract_param(param: object) -> ParamDef:
     )
 
 
+def _get_port_lines(
+    body: object, source_manager: object,
+) -> dict[str, int]:
+    """Get a mapping of port name to source line number."""
+    port_lines: dict[str, int] = {}
+    for port in body.portList:  # type: ignore[attr-defined]
+        loc = port.location
+        line = source_manager.getLineNumber(loc)  # type: ignore[attr-defined]
+        port_lines[port.name] = line
+    return port_lines
+
+
+def _apply_annotations(
+    ports: list[PortDef],
+    annotations: dict[str, dict[str, str]],
+) -> list[PortDef]:
+    """Apply parsed annotations to port definitions.
+
+    Returns a new list with hidden ports removed and fields updated.
+    """
+    result: list[PortDef] = []
+    for port in ports:
+        ann = annotations.get(port.name, {})
+
+        if ann.get("hide", "").lower() in ("true", "1", "yes"):
+            continue
+
+        # Create updated port with annotation fields
+        updated = PortDef(
+            name=port.name,
+            direction=port.direction,
+            port_type=port.port_type,
+            is_bus=port.is_bus or ann.get("bus", "").lower()
+            in ("true", "1", "yes"),
+            bus_range=port.bus_range,
+            is_interface=port.is_interface,
+            modport=port.modport,
+            group=ann.get("group", port.group),
+            has_clock_marker=port.has_clock_marker,
+            has_active_low_marker=port.has_active_low_marker,
+        )
+        result.append(updated)
+
+    return result
+
+
 def _extract_module_from_instance(
-    inst: pyslang.InstanceSymbol, file_path: str
+    inst: pyslang.InstanceSymbol,
+    file_path: str,
+    source_manager: object,
+    source_text: str | None = None,
 ) -> ModuleIR:
     """Extract a ModuleIR from a pyslang InstanceSymbol."""
     body = inst.body
@@ -197,9 +246,20 @@ def _extract_module_from_instance(
         elif isinstance(port, pyslang.PortSymbol):
             ports.append(_extract_port(port))
 
+    # Apply comment annotations if source text is available
+    if source_text is not None:
+        from svblock.parser.annotation import parse_annotations_from_text
+
+        port_lines = _get_port_lines(body, source_manager)
+        annotations = parse_annotations_from_text(source_text, port_lines)
+        ports = _apply_annotations(ports, annotations)
+
     params: list[ParamDef] = []
     for param in body.parameters:
-        if isinstance(param, (pyslang.ParameterSymbol, pyslang.TypeParameterSymbol)):
+        if isinstance(
+            param,
+            (pyslang.ParameterSymbol, pyslang.TypeParameterSymbol),
+        ):
             params.append(_extract_param(param))
 
     return ModuleIR(
@@ -231,6 +291,11 @@ def extract_modules(
         raise ParseError(f"File not found: {file_path}")
 
     try:
+        source_text = file_path.read_text(encoding="utf-8")
+    except OSError as e:
+        raise ParseError(f"Cannot read {file_path}: {e}") from e
+
+    try:
         tree = pyslang.SyntaxTree.fromFile(str(file_path))
     except Exception as e:
         raise ParseError(f"Failed to parse {file_path}: {e}") from e
@@ -252,10 +317,15 @@ def extract_modules(
                 raise ParseError(f"Parse error in {file_path}: {d}")
 
     file_str = str(file_path)
+    sm = comp.sourceManager
     modules: list[ModuleIR] = []
     for inst in comp.getRoot().topInstances:
         if inst.isModule:
-            modules.append(_extract_module_from_instance(inst, file_str))
+            modules.append(
+                _extract_module_from_instance(
+                    inst, file_str, sm, source_text
+                )
+            )
 
     return modules
 
