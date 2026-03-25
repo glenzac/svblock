@@ -3,9 +3,16 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
+from pathlib import Path
 
 from svblock import __version__
+from svblock.config import load_theme
+from svblock.layout.engine import LayoutConfig, compute_layout
+from svblock.layout.grouping import apply_grouping
+from svblock.parser import ParseError, extract_module, extract_modules
+from svblock.renderer.svg_renderer import RenderOptions, render_svg
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -88,13 +95,96 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
 
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
+
     if not args.input_files:
         parser.print_help(sys.stderr)
         return 1
 
-    # Pipeline will be wired up in Phase 9
-    print(f"svblock v{__version__}: not yet implemented", file=sys.stderr)
-    return 2
+    for input_file in args.input_files:
+        result = _process_file(input_file, args)
+        if result != 0:
+            return result
+    return 0
+
+
+def _process_file(input_file: str, args: argparse.Namespace) -> int:
+    """Process a single input file through the full pipeline."""
+    path = Path(input_file)
+    if not path.exists():
+        print(f"File not found: {input_file}", file=sys.stderr)
+        return 1
+
+    # Parse
+    try:
+        modules = extract_modules(path)
+    except ParseError as e:
+        print(f"Parse error: {e}", file=sys.stderr)
+        return 2
+
+    # --list-modules mode
+    if args.list_modules:
+        for m in modules:
+            print(m.name)
+        return 0
+
+    if not modules:
+        print(f"No modules found in {input_file}", file=sys.stderr)
+        return 2
+
+    # Select module
+    if args.module:
+        try:
+            module = extract_module(path, args.module)
+        except ParseError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            return 1
+    else:
+        module = modules[0]
+
+    # Grouping
+    module = apply_grouping(module, flat=args.no_groups)
+
+    # Layout
+    layout_config = LayoutConfig(
+        no_params=args.no_params,
+        no_groups=args.no_groups,
+        no_decorators=args.no_decorators,
+    )
+    if args.width:
+        layout_config.min_box_width = float(args.width)
+
+    layout = compute_layout(module, layout_config)
+
+    # Theme
+    theme = load_theme(args.theme)
+
+    # Render
+    options = RenderOptions(
+        no_decorators=args.no_decorators,
+        no_params=args.no_params,
+        standalone=not args.sphinx,
+    )
+    svg_output = render_svg(layout, theme, options)
+
+    # Output
+    fmt = args.format
+    if fmt != "svg":
+        print(
+            f"Export format '{fmt}' not yet supported. "
+            f"Install with: pip install svblock[{fmt}]",
+            file=sys.stderr,
+        )
+        return 1
+
+    output_path = args.output or f"{module.name}.svg"
+    Path(output_path).write_text(svg_output, encoding="utf-8")
+
+    if args.verbose:
+        print(f"Wrote {output_path}", file=sys.stderr)
+
+    return 0
 
 
 if __name__ == "__main__":
