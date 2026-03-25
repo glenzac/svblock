@@ -38,7 +38,7 @@ Phase 0  (Scaffolding)
 ## Phase 0 — Project Scaffolding & Packaging
 
 ### What gets built
-- `pyproject.toml` — metadata, dependencies, optional groups (`[png]`, `[pdf]`, `[sphinx]`, `[dev]`), `sv-sym` console entry point
+- `pyproject.toml` — metadata, dependencies, optional groups (`[png]`, `[pdf]`, `[sphinx]`, `[dev]`), `svblock` console entry point
 - `src/svblock/__init__.py` with `__version__`
 - Empty `__init__.py` for every subpackage: `parser/`, `model/`, `layout/`, `renderer/`, `exporters/`, `sphinx_ext/`
 - `tests/` structure with `conftest.py` and `fixtures/` directory
@@ -65,7 +65,7 @@ ruff.toml
 ### Acceptance criteria
 - `pip install -e .` succeeds on Python 3.10+
 - `python -c "import svblock; print(svblock.__version__)"` works
-- `sv-sym --version` prints version and exits
+- `svblock --version` prints version and exits
 - `pytest` runs, collects zero tests, exits cleanly
 - `ruff check src/` passes
 
@@ -74,7 +74,7 @@ ruff.toml
 - `pyproject.toml` only (no `setup.py`). Build backend: `hatchling` or `setuptools`
 - Pin `pyslang >= 6.0` as mandatory. `python_requires = ">=3.10"`
 - Optional groups: `png` = `cairosvg`, `pdf` = `cairosvg`, `sphinx` = `sphinx>=5`, `dev` = `pytest, pytest-snapshot, ruff, mypy`
-- The `sv-sym` entry point maps to `svblock.cli:main`
+- The `svblock` entry point maps to `svblock.cli:main`
 
 ### Dependencies
 None (first phase).
@@ -374,11 +374,11 @@ tests/test_cli.py
 ```
 
 ### Acceptance criteria
-- `sv-sym module.sv` produces SVG in current directory
-- `sv-sym module.sv -o out.svg` writes to specified path
-- `sv-sym multi.sv --list-modules` lists module names to stdout
-- `sv-sym module.sv -m nonexistent` → error, exit code 1
-- `sv-sym missing.sv` → "File not found", exit code 1
+- `svblock module.sv` produces SVG in current directory
+- `svblock module.sv -o out.svg` writes to specified path
+- `svblock multi.sv --list-modules` lists module names to stdout
+- `svblock module.sv -m nonexistent` → error, exit code 1
+- `svblock missing.sv` → "File not found", exit code 1
 - Theme, format, and all flag combinations work together
 - Exit codes: 0 = success, 1 = user error, 2 = parse error
 
@@ -443,8 +443,8 @@ tests/test_exporters.py
 ```
 
 ### Acceptance criteria
-- `sv-sym fixture.sv -f png` → valid PNG (verify magic bytes)
-- `sv-sym fixture.sv -f pdf` → valid PDF
+- `svblock fixture.sv -f png` → valid PNG (verify magic bytes)
+- `svblock fixture.sv -f pdf` → valid PDF
 - Missing deps → clear message: "Install with: `pip install svblock[png]`"
 - Scale factor works correctly
 - Tests skip gracefully when optional deps missing
@@ -458,9 +458,9 @@ Phase 7, Phase 9. **Can be built in parallel with Phases 10, 12, 13.**
 
 ### What gets built
 - `__init__.py` — Sphinx `setup()` registration
-- `directive.py` — `.. sv-sym::` directive with options: `:module:`, `:theme:`, `:caption:`, `:align:`, `:no-params:`, `:no-groups:`, `:no-decorators:`, `:width:`
+- `directive.py` — `.. svblock::` directive with options: `:module:`, `:theme:`, `:caption:`, `:align:`, `:no-params:`, `:no-groups:`, `:no-decorators:`, `:width:`
 - HTML builder: inline SVG (`standalone=False`). LaTeX builder: temp PNG/PDF image
-- Reads `conf.py`: `sv_sym_default_theme`, `sv_sym_include_paths`, `sv_sym_default_format`
+- Reads `conf.py`: `svblock_default_theme`, `svblock_include_paths`, `svblock_default_format`
 
 ### Files
 ```
@@ -470,7 +470,7 @@ tests/test_sphinx_ext.py
 ```
 
 ### Acceptance criteria
-- Minimal Sphinx project with `extensions = ['svblock.sphinx_ext']` + `.. sv-sym::` builds cleanly
+- Minimal Sphinx project with `extensions = ['svblock.sphinx_ext']` + `.. svblock::` builds cleanly
 - HTML output contains inline SVG
 - `:module:`, `:theme:`, `:caption:` options work
 - `conf.py` defaults respected
@@ -478,7 +478,7 @@ tests/test_sphinx_ext.py
 ### Design considerations
 - Follow Sphinx's built-in `graphviz` extension pattern
 - Direct Python import (no subprocess) for performance
-- `sv_sym_include_paths` critical for resolving `` `include `` in Sphinx builds
+- `svblock_include_paths` critical for resolving `` `include `` in Sphinx builds
 
 ### Dependencies
 Phases 0-9, Phase 11 (for LaTeX). **Can be built in parallel with Phases 10, 11, 13.**

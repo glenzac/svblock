@@ -40,7 +40,7 @@ shortcomings that make it unsuitable as a foundation:
 - CSS-themeable output (dark mode, custom palettes, documentation pipeline integration)
 
 ### Secondary goals
-- Sphinx extension (drop-in `.. sv-sym::` directive)
+- Sphinx extension (drop-in `.. svblock::` directive)
 - Stable, deterministic SVG output safe for version control and PR diffing
 - Interface and modport port rendering as a distinct visual type
 - YAML/TOML-based style configuration
@@ -180,7 +180,7 @@ svblock/
 │   └── pdf.py              # svg to pdf wrapper (optional dep)
 ├── sphinx_ext/
 │   ├── __init__.py
-│   └── directive.py        # .. sv-sym:: Sphinx directive
+│   └── directive.py        # .. svblock:: Sphinx directive
 └── config.py               # Loads YAML / TOML style config
 ```
 
@@ -317,7 +317,7 @@ When no `@sym` annotations are present, the tool applies heuristics:
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" width="W" height="H"
-     viewBox="0 0 W H" class="sv-sym">
+     viewBox="0 0 W H" class="svblock">
   <style>
     /* CSS variables for theming */
     :root {
@@ -361,7 +361,7 @@ Custom themes can be supplied via `--theme path/to/theme.yaml`.
 ## 9. CLI Interface
 
 ```
-Usage: sv-sym [OPTIONS] INPUT_FILE [INPUT_FILE ...]
+Usage: svblock [OPTIONS] INPUT_FILE [INPUT_FILE ...]
 
 Options:
   -o, --output PATH         Output file path (default: <module>.<format>)
@@ -384,17 +384,17 @@ Options:
 
 ```bash
 # Basic usage — renders first module found as SVG
-sv-sym my_module.sv
+svblock my_module.sv
 
 # Specific module, dark theme, PNG output
-sv-sym my_module.sv -m fifo_ctrl --theme dark -f png
+svblock my_module.sv -m fifo_ctrl --theme dark -f png
 
 # Batch: render all modules in a file
-sv-sym my_module.sv --list-modules | xargs -I{} sv-sym my_module.sv -m {}
+svblock my_module.sv --list-modules | xargs -I{} svblock my_module.sv -m {}
 
 # Used in a Makefile
 docs/%.svg: rtl/%.sv
-    sv-sym $< -o $@
+    svblock $< -o $@
 ```
 
 ---
@@ -402,7 +402,7 @@ docs/%.svg: rtl/%.sv
 ## 10. Sphinx Extension
 
 ```rst
-.. sv-sym:: path/to/my_module.sv
+.. svblock:: path/to/my_module.sv
    :module: fifo_ctrl
    :theme: default
    :caption: FIFO Controller interface
@@ -418,9 +418,9 @@ Configuration in `conf.py`:
 ```python
 extensions = ['svblock.sphinx_ext']
 
-sv_sym_default_theme = 'dark'
-sv_sym_include_paths = ['../rtl', '../ip']  # for `include resolution
-sv_sym_default_format = 'svg'
+svblock_default_theme = 'dark'
+svblock_include_paths = ['../rtl', '../ip']  # for `include resolution
+svblock_default_format = 'svg'
 ```
 
 ---
