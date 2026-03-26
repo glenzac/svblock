@@ -14,7 +14,8 @@
       --sym-header-bg: #e8e8e8;
       --sym-param-text: #666666;
       }
-      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-box-fill { fill: var(--sym-bg); stroke: none; }
+      .svblock-box-border { fill: none; stroke: var(--sym-border); stroke-width: 1.5; }
       .svblock-header { fill: var(--sym-header-bg); }
       .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
       .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
@@ -28,9 +29,10 @@
       .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
       .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
     </style>
-  <rect x="30" y="0" width="334.9" height="132" class="svblock-box"/>
+  <rect x="30" y="0" width="334.9" height="132" class="svblock-box-fill"/>
   <rect x="30" y="0" width="334.9" height="36" class="svblock-header"/>
   <line x1="30" y1="36" x2="364.9" y2="36" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <rect x="30" y="0" width="334.9" height="132" class="svblock-box-border"/>
   <text x="197.45" y="22" text-anchor="middle" class="svblock-name" id="module-non_ansi">non_ansi</text>
   <line x1="30" y1="56" x2="364.9" y2="56" class="svblock-group-sep" id="group-Inputs"/>
   <text x="197.45" y="69" class="svblock-group-label">Inputs</text>
@@ -38,7 +40,7 @@
   <text x="197.45" y="107" class="svblock-group-label">Outputs</text>
   <line x1="0" y1="46" x2="30" y2="46" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
   <text x="38" y="50" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
-  <polygon points="30,40 36,46 30,52" fill="none" stroke="currentColor" stroke-width="1"/>
+  <polygon points="30.75,40 36.75,46 30.75,52" fill="none" stroke="currentColor" stroke-width="1"/>
   <line x1="0" y1="84" x2="30" y2="84" class="svblock-pin-bus" stroke="svblock-port-in" id="port-data_in"/>
   <text x="38" y="88" text-anchor="start" class="svblock-port svblock-port-in"><title>data_in</title>data_in [7:0]</text>
   <line x1="364.9" y1="122" x2="394.9" y2="122" class="svblock-pin-bus" stroke="svblock-port-out" id="port-data_out"/>

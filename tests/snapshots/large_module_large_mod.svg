@@ -14,7 +14,8 @@
       --sym-header-bg: #e8e8e8;
       --sym-param-text: #666666;
       }
-      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-box-fill { fill: var(--sym-bg); stroke: none; }
+      .svblock-box-border { fill: none; stroke: var(--sym-border); stroke-width: 1.5; }
       .svblock-header { fill: var(--sym-header-bg); }
       .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
       .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
@@ -28,9 +29,10 @@
       .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
       .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
     </style>
-  <rect x="30" y="0" width="444.85" height="574" class="svblock-box"/>
+  <rect x="30" y="0" width="444.85" height="574" class="svblock-box-fill"/>
   <rect x="30" y="0" width="444.85" height="84" class="svblock-header"/>
   <line x1="30" y1="84" x2="474.85" y2="84" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <rect x="30" y="0" width="444.85" height="574" class="svblock-box-border"/>
   <text x="252.43" y="22" text-anchor="middle" class="svblock-name" id="module-large_mod">large_mod</text>
   <text x="252.43" y="36" text-anchor="middle" class="svblock-param" id="param-DATA_W">int DATA_W = 32</text>
   <text x="252.43" y="52" text-anchor="middle" class="svblock-param" id="param-ADDR_W">int ADDR_W = 16</text>
@@ -47,7 +49,7 @@
   <text x="252.43" y="489" class="svblock-group-label">Interrupts</text>
   <line x1="0" y1="94" x2="30" y2="94" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
   <text x="38" y="98" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
-  <polygon points="30,88 36,94 30,100" fill="none" stroke="currentColor" stroke-width="1"/>
+  <polygon points="30.75,88 36.75,94 30.75,100" fill="none" stroke="currentColor" stroke-width="1"/>
   <line x1="0" y1="114" x2="30" y2="114" class="svblock-pin" stroke="svblock-port-in" id="port-rst_n"/>
   <text x="38" y="118" text-anchor="start" class="svblock-port svblock-port-in"><title>rst_n</title>rst_n</text>
   <circle cx="27" cy="114" r="3" fill="var(--sym-bg)" stroke="currentColor" stroke-width="1"/>

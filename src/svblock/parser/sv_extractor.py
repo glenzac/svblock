@@ -28,7 +28,7 @@ _DIRECTION_MAP = {
 
 def _extract_syntax_text(syntax_node: object) -> str:
     """Extract concatenated text tokens from a pyslang syntax node JSON."""
-    j = json.loads(syntax_node.to_json())  # type: ignore[union-attr]
+    j = json.loads(syntax_node.to_json())  # type: ignore[attr-defined]
     return _collect_text(j)
 
 
