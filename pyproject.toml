@@ -61,15 +61,7 @@ target-version = "py310"
 select = ["E", "F", "W", "I", "UP"]
 
 [tool.mypy]
-python_version = "3.10"
 warn_return_any = true
-warn_unused_configs = true
 disallow_untyped_defs = true
-disable_error_code = ["import-untyped", "import-not-found"]
 exclude = ["svblock/sphinx_ext/"]
-
-[[tool.mypy.overrides]]
-module = [
-    "svblock.parser.sv_extractor",
-]
 disable_error_code = ["import-untyped", "import-not-found", "attr-defined"]
