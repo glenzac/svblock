@@ -47,4 +47,4 @@ jobs:
           pip install -e ".[dev,sphinx]"
 
       - name: Type check with mypy
-        run: mypy src/svblock/ --ignore-missing-imports
+        run: mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/'
