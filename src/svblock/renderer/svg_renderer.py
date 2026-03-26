@@ -48,7 +48,8 @@ def _css_block(theme: dict[str, str]) -> str:
     )
     # CSS rules as list to avoid long lines in source
     rules = [
-        ".svblock-box { fill: var(--sym-bg); "
+        ".svblock-box-fill { fill: var(--sym-bg); stroke: none; }",
+        ".svblock-box-border { fill: none; "
         "stroke: var(--sym-border); stroke-width: 1.5; }",
         ".svblock-header { fill: var(--sym-header-bg); }",
         ".svblock-name { font-family: sans-serif; "
@@ -161,10 +162,13 @@ def _render_decorator(
     pin: PinRow, x: float, y: float, side: PinSide
 ) -> str:
     """Render the decorator symbol for a pin."""
+    # Border half-width offset so decorators sit flush against the visible
+    # inner edge of the module boundary (stroke-width 1.5 → offset 0.75).
+    border_offset = 0.75
     if pin.decorator == DecoratorType.CLOCK:
         if side == PinSide.LEFT:
-            return _clock_triangle(x, y)
-        return _clock_triangle(x, y, flip=True)
+            return _clock_triangle(x + border_offset, y)
+        return _clock_triangle(x - border_offset, y, flip=True)
     if pin.decorator == DecoratorType.ACTIVE_LOW:
         if side == PinSide.LEFT:
             return _inversion_bubble(x - 3, y)
@@ -227,15 +231,16 @@ def render_svg(
     # CSS
     parts.append(_css_block(merged_theme))
 
-    # Module box
+    # Module box — fill drawn first, then header, then border on top
+    # so the border has uniform thickness on all sides.
     parts.append(
         f'  <rect x="{_fmt(layout.box_x)}" y="{_fmt(layout.box_y)}" '
         f'width="{_fmt(layout.box_width)}" '
         f'height="{_fmt(layout.box_height)}" '
-        f'class="svblock-box"/>'
+        f'class="svblock-box-fill"/>'
     )
 
-    # Header background (fill only — no stroke to avoid overlap with box border)
+    # Header background (fill only)
     hr = layout.header_rect
     parts.append(
         f'  <rect x="{_fmt(hr.x)}" y="{_fmt(hr.y)}" '
@@ -247,6 +252,14 @@ def render_svg(
         f'  <line x1="{_fmt(hr.x)}" y1="{_fmt(hr.y + hr.height)}" '
         f'x2="{_fmt(hr.x + hr.width)}" y2="{_fmt(hr.y + hr.height)}" '
         f'stroke="var(--sym-border)" stroke-width="0.5"/>'
+    )
+
+    # Module box border — drawn after header so it is uniformly visible
+    parts.append(
+        f'  <rect x="{_fmt(layout.box_x)}" y="{_fmt(layout.box_y)}" '
+        f'width="{_fmt(layout.box_width)}" '
+        f'height="{_fmt(layout.box_height)}" '
+        f'class="svblock-box-border"/>'
     )
 
     # Module name

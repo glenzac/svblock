@@ -14,7 +14,8 @@
       --sym-header-bg: #e8e8e8;
       --sym-param-text: #666666;
       }
-      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-box-fill { fill: var(--sym-bg); stroke: none; }
+      .svblock-box-border { fill: none; stroke: var(--sym-border); stroke-width: 1.5; }
       .svblock-header { fill: var(--sym-header-bg); }
       .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
       .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
@@ -28,9 +29,10 @@
       .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
       .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
     </style>
-  <rect x="30" y="0" width="427.6" height="150" class="svblock-box"/>
+  <rect x="30" y="0" width="427.6" height="150" class="svblock-box-fill"/>
   <rect x="30" y="0" width="427.6" height="52" class="svblock-header"/>
   <line x1="30" y1="52" x2="457.6" y2="52" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <rect x="30" y="0" width="427.6" height="150" class="svblock-box-border"/>
   <text x="243.8" y="22" text-anchor="middle" class="svblock-name" id="module-bus_mod">bus_mod</text>
   <text x="243.8" y="36" text-anchor="middle" class="svblock-param" id="param-WIDTH">int WIDTH = 8</text>
   <line x1="30" y1="112" x2="457.6" y2="112" class="svblock-group-sep" id="group-Outputs"/>
