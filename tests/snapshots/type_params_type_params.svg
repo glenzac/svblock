@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.1" height="158" viewBox="0 0 420.1 158" class="svblock">
+    <style>
+      :root {
+      --sym-bg: #ffffff;
+      --sym-border: #333333;
+      --sym-text: #111111;
+      --sym-pin-input: #1a6db5;
+      --sym-pin-output: #b52a1a;
+      --sym-pin-inout: #6a2ab5;
+      --sym-pin-iface: #1a9e55;
+      --sym-group-bg: #f0f0f0;
+      --sym-group-text: #555555;
+      --sym-bus-stroke: 3;
+      --sym-header-bg: #e8e8e8;
+      --sym-param-text: #666666;
+      }
+      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-header { fill: var(--sym-header-bg); }
+      .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
+      .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
+      .svblock-port { font-family: monospace; font-size: 13px; }
+      .svblock-port-in { fill: var(--sym-pin-input); }
+      .svblock-port-out { fill: var(--sym-pin-output); }
+      .svblock-port-inout { fill: var(--sym-pin-inout); }
+      .svblock-port-iface { fill: var(--sym-pin-iface); }
+      .svblock-pin { stroke-width: 1.5; }
+      .svblock-pin-bus { stroke-width: var(--sym-bus-stroke); }
+      .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
+      .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
+    </style>
+  <rect x="30" y="0" width="360.1" height="158" class="svblock-box"/>
+  <rect x="30" y="0" width="360.1" height="100" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <text x="210.05" y="22" text-anchor="middle" class="svblock-name" id="module-type_params">type_params</text>
+  <text x="210.05" y="36" text-anchor="middle" class="svblock-param" id="param-T">type T</text>
+  <text x="210.05" y="52" text-anchor="middle" class="svblock-param" id="param-WIDTH">int WIDTH = 8</text>
+  <text x="210.05" y="68" text-anchor="middle" class="svblock-param" id="param-NAME">string NAME</text>
+  <text x="210.05" y="84" text-anchor="middle" class="svblock-param" id="param-DEPTH">int DEPTH = 32</text>
+  <line x1="30" y1="120" x2="390.1" y2="120" class="svblock-group-sep" id="group-Outputs"/>
+  <text x="210.05" y="133" class="svblock-group-label">Outputs</text>
+  <line x1="0" y1="110" x2="30" y2="110" class="svblock-pin" stroke="svblock-port-in" id="port-data_in"/>
+  <text x="38" y="114" text-anchor="start" class="svblock-port svblock-port-in"><title>data_in</title>data_in</text>
+  <line x1="390.1" y1="148" x2="420.1" y2="148" class="svblock-pin-bus" stroke="svblock-port-out" id="port-data_out"/>
+  <text x="382.1" y="152" text-anchor="end" class="svblock-port svblock-port-out"><title>data_out</title>data_out [WIDTH-1:0]</text>
+</svg>

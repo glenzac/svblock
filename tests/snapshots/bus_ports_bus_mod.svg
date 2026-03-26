@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="487.6" height="150" viewBox="0 0 487.6 150" class="svblock">
+    <style>
+      :root {
+      --sym-bg: #ffffff;
+      --sym-border: #333333;
+      --sym-text: #111111;
+      --sym-pin-input: #1a6db5;
+      --sym-pin-output: #b52a1a;
+      --sym-pin-inout: #6a2ab5;
+      --sym-pin-iface: #1a9e55;
+      --sym-group-bg: #f0f0f0;
+      --sym-group-text: #555555;
+      --sym-bus-stroke: 3;
+      --sym-header-bg: #e8e8e8;
+      --sym-param-text: #666666;
+      }
+      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-header { fill: var(--sym-header-bg); }
+      .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
+      .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
+      .svblock-port { font-family: monospace; font-size: 13px; }
+      .svblock-port-in { fill: var(--sym-pin-input); }
+      .svblock-port-out { fill: var(--sym-pin-output); }
+      .svblock-port-inout { fill: var(--sym-pin-inout); }
+      .svblock-port-iface { fill: var(--sym-pin-iface); }
+      .svblock-pin { stroke-width: 1.5; }
+      .svblock-pin-bus { stroke-width: var(--sym-bus-stroke); }
+      .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
+      .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
+    </style>
+  <rect x="30" y="0" width="427.6" height="150" class="svblock-box"/>
+  <rect x="30" y="0" width="427.6" height="52" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <text x="243.8" y="22" text-anchor="middle" class="svblock-name" id="module-bus_mod">bus_mod</text>
+  <text x="243.8" y="36" text-anchor="middle" class="svblock-param" id="param-WIDTH">int WIDTH = 8</text>
+  <line x1="30" y1="112" x2="457.6" y2="112" class="svblock-group-sep" id="group-Outputs"/>
+  <text x="243.8" y="125" class="svblock-group-label">Outputs</text>
+  <line x1="0" y1="62" x2="30" y2="62" class="svblock-pin-bus" stroke="svblock-port-in" id="port-data_in"/>
+  <text x="38" y="66" text-anchor="start" class="svblock-port svblock-port-in"><title>data_in</title>data_in [WIDTH-1:0]</text>
+  <line x1="0" y1="82" x2="30" y2="82" class="svblock-pin-bus" stroke="svblock-port-in" id="port-nibble"/>
+  <text x="38" y="86" text-anchor="start" class="svblock-port svblock-port-in"><title>nibble</title>nibble [3:0]</text>
+  <line x1="0" y1="102" x2="30" y2="102" class="svblock-pin-bus" stroke="svblock-port-in" id="port-matrix"/>
+  <text x="38" y="106" text-anchor="start" class="svblock-port svblock-port-in"><title>matrix</title>matrix [3:0]</text>
+  <line x1="457.6" y1="140" x2="487.6" y2="140" class="svblock-pin-bus" stroke="svblock-port-out" id="port-data_out"/>
+  <text x="449.6" y="144" text-anchor="end" class="svblock-port svblock-port-out"><title>data_out</title>data_out [WIDTH-1:0]</text>
+</svg>

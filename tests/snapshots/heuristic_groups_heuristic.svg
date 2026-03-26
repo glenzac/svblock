@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="392.5" height="270" viewBox="0 0 392.5 270" class="svblock">
+    <style>
+      :root {
+      --sym-bg: #ffffff;
+      --sym-border: #333333;
+      --sym-text: #111111;
+      --sym-pin-input: #1a6db5;
+      --sym-pin-output: #b52a1a;
+      --sym-pin-inout: #6a2ab5;
+      --sym-pin-iface: #1a9e55;
+      --sym-group-bg: #f0f0f0;
+      --sym-group-text: #555555;
+      --sym-bus-stroke: 3;
+      --sym-header-bg: #e8e8e8;
+      --sym-param-text: #666666;
+      }
+      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-header { fill: var(--sym-header-bg); }
+      .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
+      .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
+      .svblock-port { font-family: monospace; font-size: 13px; }
+      .svblock-port-in { fill: var(--sym-pin-input); }
+      .svblock-port-out { fill: var(--sym-pin-output); }
+      .svblock-port-inout { fill: var(--sym-pin-inout); }
+      .svblock-port-iface { fill: var(--sym-pin-iface); }
+      .svblock-pin { stroke-width: 1.5; }
+      .svblock-pin-bus { stroke-width: var(--sym-bus-stroke); }
+      .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
+      .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
+    </style>
+  <rect x="30" y="0" width="332.5" height="270" class="svblock-box"/>
+  <rect x="30" y="0" width="332.5" height="36" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <text x="196.25" y="22" text-anchor="middle" class="svblock-name" id="module-heuristic">heuristic</text>
+  <line x1="30" y1="76" x2="362.5" y2="76" class="svblock-group-sep" id="group-Resets"/>
+  <text x="196.25" y="89" class="svblock-group-label">Resets</text>
+  <line x1="30" y1="134" x2="362.5" y2="134" class="svblock-group-sep" id="group-Inputs"/>
+  <text x="196.25" y="147" class="svblock-group-label">Inputs</text>
+  <line x1="30" y1="192" x2="362.5" y2="192" class="svblock-group-sep" id="group-Outputs"/>
+  <text x="196.25" y="205" class="svblock-group-label">Outputs</text>
+  <line x1="0" y1="46" x2="30" y2="46" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
+  <text x="38" y="50" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
+  <polygon points="32,40 38,46 32,52" fill="none" stroke="currentColor" stroke-width="1"/>
+  <line x1="0" y1="66" x2="30" y2="66" class="svblock-pin" stroke="svblock-port-in" id="port-sys_clock"/>
+  <text x="38" y="70" text-anchor="start" class="svblock-port svblock-port-in"><title>sys_clock</title>sys_clock</text>
+  <polygon points="32,60 38,66 32,72" fill="none" stroke="currentColor" stroke-width="1"/>
+  <line x1="0" y1="104" x2="30" y2="104" class="svblock-pin" stroke="svblock-port-in" id="port-rst_n"/>
+  <text x="38" y="108" text-anchor="start" class="svblock-port svblock-port-in"><title>rst_n</title>rst_n</text>
+  <circle cx="27" cy="104" r="3" fill="var(--sym-bg)" stroke="currentColor" stroke-width="1"/>
+  <line x1="0" y1="124" x2="30" y2="124" class="svblock-pin" stroke="svblock-port-in" id="port-reset_sync"/>
+  <text x="38" y="128" text-anchor="start" class="svblock-port svblock-port-in"><title>reset_sync</title>reset_sync</text>
+  <line x1="0" y1="162" x2="30" y2="162" class="svblock-pin-bus" stroke="svblock-port-in" id="port-data_in"/>
+  <text x="38" y="166" text-anchor="start" class="svblock-port svblock-port-in"><title>data_in</title>data_in [7:0]</text>
+  <line x1="0" y1="182" x2="30" y2="182" class="svblock-pin" stroke="svblock-port-in" id="port-valid"/>
+  <text x="38" y="186" text-anchor="start" class="svblock-port svblock-port-in"><title>valid</title>valid</text>
+  <line x1="362.5" y1="220" x2="392.5" y2="220" class="svblock-pin-bus" stroke="svblock-port-out" id="port-data_out"/>
+  <text x="354.5" y="224" text-anchor="end" class="svblock-port svblock-port-out"><title>data_out</title>data_out [7:0]</text>
+  <line x1="362.5" y1="240" x2="392.5" y2="240" class="svblock-pin" stroke="svblock-port-out" id="port-ready"/>
+  <text x="354.5" y="244" text-anchor="end" class="svblock-port svblock-port-out"><title>ready</title>ready</text>
+  <line x1="362.5" y1="260" x2="392.5" y2="260" class="svblock-pin" stroke="svblock-port-inout" id="port-bidir"/>
+  <text x="354.5" y="264" text-anchor="end" class="svblock-port svblock-port-inout"><title>bidir</title>bidir</text>
+  <path d="M365.5,260 L375.5,260 M372.5,257 L375.5,260 L372.5,263 M368.5,257 L365.5,260 L368.5,263" fill="none" stroke="currentColor" stroke-width="1.5"/>
+</svg>
