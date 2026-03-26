@@ -170,16 +170,24 @@ def _process_file(input_file: str, args: argparse.Namespace) -> int:
 
     # Output
     fmt = args.format
-    if fmt != "svg":
-        print(
-            f"Export format '{fmt}' not yet supported. "
-            f"Install with: pip install svblock[{fmt}]",
-            file=sys.stderr,
-        )
-        return 1
+    output_path = args.output or f"{module.name}.{fmt}"
 
-    output_path = args.output or f"{module.name}.svg"
-    Path(output_path).write_text(svg_output, encoding="utf-8")
+    if fmt == "svg":
+        Path(output_path).write_text(svg_output, encoding="utf-8")
+    elif fmt == "png":
+        try:
+            from svblock.exporters.png import svg_to_png
+            svg_to_png(svg_output, output_path)
+        except ImportError as e:
+            print(str(e), file=sys.stderr)
+            return 1
+    elif fmt == "pdf":
+        try:
+            from svblock.exporters.pdf import svg_to_pdf
+            svg_to_pdf(svg_output, output_path)
+        except ImportError as e:
+            print(str(e), file=sys.stderr)
+            return 1
 
     if args.verbose:
         print(f"Wrote {output_path}", file=sys.stderr)
