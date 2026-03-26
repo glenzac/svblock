@@ -100,9 +100,22 @@ def _pin_stroke_class(pin: PinRow) -> str:
     return "svblock-pin"
 
 
-def _clock_triangle(x: float, y: float, size: float = 6) -> str:
-    """Small triangle marker for clock pins."""
+def _clock_triangle(
+    x: float, y: float, size: float = 6, flip: bool = False,
+) -> str:
+    """Small triangle marker for clock pins.
+
+    When flip=False, the triangle points right (for left-side pins).
+    When flip=True, the triangle points left (for right-side pins).
+    """
     s = size
+    if flip:
+        return (
+            f'<polygon points="{_fmt(x)},{_fmt(y - s)} '
+            f'{_fmt(x - s)},{_fmt(y)} '
+            f'{_fmt(x)},{_fmt(y + s)}" '
+            f'fill="none" stroke="currentColor" stroke-width="1"/>'
+        )
     return (
         f'<polygon points="{_fmt(x)},{_fmt(y - s)} '
         f'{_fmt(x + s)},{_fmt(y)} '
@@ -150,8 +163,8 @@ def _render_decorator(
     """Render the decorator symbol for a pin."""
     if pin.decorator == DecoratorType.CLOCK:
         if side == PinSide.LEFT:
-            return _clock_triangle(x + 2, y)
-        return _clock_triangle(x - 8, y)
+            return _clock_triangle(x, y)
+        return _clock_triangle(x, y, flip=True)
     if pin.decorator == DecoratorType.ACTIVE_LOW:
         if side == PinSide.LEFT:
             return _inversion_bubble(x - 3, y)
@@ -191,19 +204,24 @@ def render_svg(
 
     parts: list[str] = []
 
-    # SVG envelope
-    w = _fmt(layout.total_width)
-    h = _fmt(layout.total_height)
+    # SVG envelope — expand viewBox by half the border stroke-width
+    # so that box border strokes are not clipped at the viewport edge.
+    stroke_pad = 0.75  # half of the 1.5 border stroke-width
+    w = _fmt(layout.total_width + 2 * stroke_pad)
+    h = _fmt(layout.total_height + 2 * stroke_pad)
+    vb = (
+        f"{_fmt(-stroke_pad)} {_fmt(-stroke_pad)} {w} {h}"
+    )
     if options.standalone:
         parts.append(
             f'<svg xmlns="http://www.w3.org/2000/svg" '
             f'width="{w}" height="{h}" '
-            f'viewBox="0 0 {w} {h}" class="svblock">'
+            f'viewBox="{vb}" class="svblock">'
         )
     else:
         parts.append(
             f'<svg width="{w}" height="{h}" '
-            f'viewBox="0 0 {w} {h}" class="svblock">'
+            f'viewBox="{vb}" class="svblock">'
         )
 
     # CSS
@@ -217,12 +235,17 @@ def render_svg(
         f'class="svblock-box"/>'
     )
 
-    # Header background
+    # Header background (fill only — no stroke to avoid overlap with box border)
     hr = layout.header_rect
     parts.append(
         f'  <rect x="{_fmt(hr.x)}" y="{_fmt(hr.y)}" '
         f'width="{_fmt(hr.width)}" height="{_fmt(hr.height)}" '
-        f'class="svblock-header" '
+        f'class="svblock-header"/>'
+    )
+    # Header bottom separator line
+    parts.append(
+        f'  <line x1="{_fmt(hr.x)}" y1="{_fmt(hr.y + hr.height)}" '
+        f'x2="{_fmt(hr.x + hr.width)}" y2="{_fmt(hr.y + hr.height)}" '
         f'stroke="var(--sym-border)" stroke-width="0.5"/>'
     )
 

@@ -18,16 +18,24 @@ Select a theme with the ``--theme`` CLI option:
     Light background with colored pins. Blue inputs, red outputs. Good for
     general use and embedding in documentation.
 
+    .. image:: _static/examples/theme_default.svg
+
 **dark**
     Dark background inspired by Catppuccin. Pastel-colored pins on a dark
     surface. Suitable for dark-mode documentation or presentations.
+
+    .. image:: _static/examples/theme_dark.svg
 
 **minimal**
     Monochrome -- all pins use the same gray color. Clean look for formal
     documentation where color coding is not needed.
 
+    .. image:: _static/examples/theme_minimal.svg
+
 **print**
     Pure black-and-white. Designed for printing and high-contrast display.
+
+    .. image:: _static/examples/theme_print.svg
 
 CSS Variables
 -------------

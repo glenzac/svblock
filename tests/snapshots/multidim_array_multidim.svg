@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="421.45" height="152" viewBox="0 0 421.45 152" class="svblock">
+<svg xmlns="http://www.w3.org/2000/svg" width="422.95" height="153.5" viewBox="-0.75 -0.75 422.95 153.5" class="svblock">
     <style>
       :root {
       --sym-bg: #ffffff;
@@ -29,7 +29,8 @@
       .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
     </style>
   <rect x="30" y="0" width="361.45" height="152" class="svblock-box"/>
-  <rect x="30" y="0" width="361.45" height="36" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <rect x="30" y="0" width="361.45" height="36" class="svblock-header"/>
+  <line x1="30" y1="36" x2="391.45" y2="36" stroke="var(--sym-border)" stroke-width="0.5"/>
   <text x="210.72" y="22" text-anchor="middle" class="svblock-name" id="module-multidim">multidim</text>
   <line x1="30" y1="56" x2="391.45" y2="56" class="svblock-group-sep" id="group-Inputs"/>
   <text x="210.72" y="69" class="svblock-group-label">Inputs</text>
@@ -37,7 +38,7 @@
   <text x="210.72" y="127" class="svblock-group-label">Outputs</text>
   <line x1="0" y1="46" x2="30" y2="46" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
   <text x="38" y="50" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
-  <polygon points="32,40 38,46 32,52" fill="none" stroke="currentColor" stroke-width="1"/>
+  <polygon points="30,40 36,46 30,52" fill="none" stroke="currentColor" stroke-width="1"/>
   <line x1="0" y1="84" x2="30" y2="84" class="svblock-pin-bus" stroke="svblock-port-in" id="port-matrix_in"/>
   <text x="38" y="88" text-anchor="start" class="svblock-port svblock-port-in"><title>matrix_in</title>matrix_in [3:0]</text>
   <line x1="0" y1="104" x2="30" y2="104" class="svblock-pin-bus" stroke="svblock-port-in" id="port-cube_in"/>

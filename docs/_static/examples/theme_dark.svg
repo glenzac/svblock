@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="321.1" height="211.5" viewBox="-0.75 -0.75 321.1 211.5" class="svblock">
     <style>
       :root {
-      --sym-bg: #ffffff;
-      --sym-border: #333333;
-      --sym-text: #111111;
-      --sym-pin-input: #1a6db5;
-      --sym-pin-output: #b52a1a;
-      --sym-pin-inout: #6a2ab5;
-      --sym-pin-iface: #1a9e55;
-      --sym-group-bg: #f0f0f0;
-      --sym-group-text: #555555;
+      --sym-bg: #1e1e2e;
+      --sym-border: #cdd6f4;
+      --sym-text: #cdd6f4;
+      --sym-pin-input: #89b4fa;
+      --sym-pin-output: #f38ba8;
+      --sym-pin-inout: #cba6f7;
+      --sym-pin-iface: #a6e3a1;
+      --sym-group-bg: #313244;
+      --sym-group-text: #a6adc8;
       --sym-bus-stroke: 3;
-      --sym-header-bg: #e8e8e8;
-      --sym-param-text: #666666;
+      --sym-header-bg: #313244;
+      --sym-param-text: #a6adc8;
       }
       .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
       .svblock-header { fill: var(--sym-header-bg); }
