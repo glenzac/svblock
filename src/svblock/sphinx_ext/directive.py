@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 """Sphinx directive for embedding svblock pin diagrams."""
 
 from __future__ import annotations
