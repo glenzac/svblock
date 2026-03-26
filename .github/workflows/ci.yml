@@ -47,4 +47,10 @@ jobs:
           pip install -e ".[dev,sphinx]"
 
       - name: Type check with mypy
-        run: mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/'
+        run: |
+          echo "=== mypy version ==="
+          mypy --version
+          echo "=== running mypy ==="
+          mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/' 2>&1 || true
+          echo "=== exit code: $? ==="
+          mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/'
