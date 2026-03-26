@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="504.85" height="574" viewBox="0 0 504.85 574" class="svblock">
+    <style>
+      :root {
+      --sym-bg: #ffffff;
+      --sym-border: #333333;
+      --sym-text: #111111;
+      --sym-pin-input: #1a6db5;
+      --sym-pin-output: #b52a1a;
+      --sym-pin-inout: #6a2ab5;
+      --sym-pin-iface: #1a9e55;
+      --sym-group-bg: #f0f0f0;
+      --sym-group-text: #555555;
+      --sym-bus-stroke: 3;
+      --sym-header-bg: #e8e8e8;
+      --sym-param-text: #666666;
+      }
+      .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
+      .svblock-header { fill: var(--sym-header-bg); }
+      .svblock-name { font-family: sans-serif; font-size: 15px; font-weight: bold; fill: var(--sym-text); }
+      .svblock-param { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); }
+      .svblock-port { font-family: monospace; font-size: 13px; }
+      .svblock-port-in { fill: var(--sym-pin-input); }
+      .svblock-port-out { fill: var(--sym-pin-output); }
+      .svblock-port-inout { fill: var(--sym-pin-inout); }
+      .svblock-port-iface { fill: var(--sym-pin-iface); }
+      .svblock-pin { stroke-width: 1.5; }
+      .svblock-pin-bus { stroke-width: var(--sym-bus-stroke); }
+      .svblock-group-sep { stroke: var(--sym-group-text); stroke-width: 0.5; stroke-dasharray: 4,2; }
+      .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
+    </style>
+  <rect x="30" y="0" width="444.85" height="574" class="svblock-box"/>
+  <rect x="30" y="0" width="444.85" height="84" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <text x="252.43" y="22" text-anchor="middle" class="svblock-name" id="module-large_mod">large_mod</text>
+  <text x="252.43" y="36" text-anchor="middle" class="svblock-param" id="param-DATA_W">int DATA_W = 32</text>
+  <text x="252.43" y="52" text-anchor="middle" class="svblock-param" id="param-ADDR_W">int ADDR_W = 16</text>
+  <text x="252.43" y="68" text-anchor="middle" class="svblock-param" id="param-ID_W">int ID_W = 4</text>
+  <line x1="30" y1="124" x2="474.85" y2="124" class="svblock-group-sep" id="group-Write Channel"/>
+  <text x="252.43" y="137" class="svblock-group-label">Write Channel</text>
+  <line x1="30" y1="242" x2="474.85" y2="242" class="svblock-group-sep" id="group-Read Channel"/>
+  <text x="252.43" y="255" class="svblock-group-label">Read Channel</text>
+  <line x1="30" y1="340" x2="474.85" y2="340" class="svblock-group-sep" id="group-Control"/>
+  <text x="252.43" y="353" class="svblock-group-label">Control</text>
+  <line x1="30" y1="398" x2="474.85" y2="398" class="svblock-group-sep" id="group-Status"/>
+  <text x="252.43" y="411" class="svblock-group-label">Status</text>
+  <line x1="30" y1="476" x2="474.85" y2="476" class="svblock-group-sep" id="group-Interrupts"/>
+  <text x="252.43" y="489" class="svblock-group-label">Interrupts</text>
+  <line x1="0" y1="94" x2="30" y2="94" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
+  <text x="38" y="98" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
+  <polygon points="32,88 38,94 32,100" fill="none" stroke="currentColor" stroke-width="1"/>
+  <line x1="0" y1="114" x2="30" y2="114" class="svblock-pin" stroke="svblock-port-in" id="port-rst_n"/>
+  <text x="38" y="118" text-anchor="start" class="svblock-port svblock-port-in"><title>rst_n</title>rst_n</text>
+  <circle cx="27" cy="114" r="3" fill="var(--sym-bg)" stroke="currentColor" stroke-width="1"/>
+  <line x1="0" y1="152" x2="30" y2="152" class="svblock-pin-bus" stroke="svblock-port-in" id="port-wr_addr"/>
+  <text x="38" y="156" text-anchor="start" class="svblock-port svblock-port-in"><title>wr_addr</title>wr_addr [ADDR_W-1:0]</text>
+  <line x1="0" y1="172" x2="30" y2="172" class="svblock-pin-bus" stroke="svblock-port-in" id="port-wr_data"/>
+  <text x="38" y="176" text-anchor="start" class="svblock-port svblock-port-in"><title>wr_data</title>wr_data [DATA_W-1:0]</text>
+  <line x1="0" y1="192" x2="30" y2="192" class="svblock-pin-bus" stroke="svblock-port-in" id="port-wr_strb"/>
+  <text x="38" y="196" text-anchor="start" class="svblock-port svblock-port-in"><title>wr_strb</title>wr_strb [3:0]</text>
+  <line x1="0" y1="212" x2="30" y2="212" class="svblock-pin" stroke="svblock-port-in" id="port-wr_valid"/>
+  <text x="38" y="216" text-anchor="start" class="svblock-port svblock-port-in"><title>wr_valid</title>wr_valid</text>
+  <line x1="0" y1="232" x2="30" y2="232" class="svblock-pin-bus" stroke="svblock-port-in" id="port-wr_id"/>
+  <text x="38" y="236" text-anchor="start" class="svblock-port svblock-port-in"><title>wr_id</title>wr_id [ID_W-1:0]</text>
+  <line x1="474.85" y1="152" x2="504.85" y2="152" class="svblock-pin" stroke="svblock-port-out" id="port-wr_ready"/>
+  <text x="466.85" y="156" text-anchor="end" class="svblock-port svblock-port-out"><title>wr_ready</title>wr_ready</text>
+  <line x1="0" y1="270" x2="30" y2="270" class="svblock-pin-bus" stroke="svblock-port-in" id="port-rd_addr"/>
+  <text x="38" y="274" text-anchor="start" class="svblock-port svblock-port-in"><title>rd_addr</title>rd_addr [ADDR_W-1:0]</text>
+  <line x1="0" y1="290" x2="30" y2="290" class="svblock-pin" stroke="svblock-port-in" id="port-rd_valid"/>
+  <text x="38" y="294" text-anchor="start" class="svblock-port svblock-port-in"><title>rd_valid</title>rd_valid</text>
+  <line x1="474.85" y1="270" x2="504.85" y2="270" class="svblock-pin" stroke="svblock-port-out" id="port-rd_ready"/>
+  <text x="466.85" y="274" text-anchor="end" class="svblock-port svblock-port-out"><title>rd_ready</title>rd_ready</text>
+  <line x1="474.85" y1="290" x2="504.85" y2="290" class="svblock-pin-bus" stroke="svblock-port-out" id="port-rd_data"/>
+  <text x="466.85" y="294" text-anchor="end" class="svblock-port svblock-port-out"><title>rd_data</title>rd_data [DATA_W-1:0]</text>
+  <line x1="474.85" y1="310" x2="504.85" y2="310" class="svblock-pin" stroke="svblock-port-out" id="port-rd_resp"/>
+  <text x="466.85" y="314" text-anchor="end" class="svblock-port svblock-port-out"><title>rd_resp</title>rd_resp</text>
+  <line x1="474.85" y1="330" x2="504.85" y2="330" class="svblock-pin-bus" stroke="svblock-port-out" id="port-rd_id"/>
+  <text x="466.85" y="334" text-anchor="end" class="svblock-port svblock-port-out"><title>rd_id</title>rd_id [ID_W-1:0]</text>
+  <line x1="0" y1="368" x2="30" y2="368" class="svblock-pin" stroke="svblock-port-in" id="port-enable"/>
+  <text x="38" y="372" text-anchor="start" class="svblock-port svblock-port-in"><title>enable</title>enable</text>
+  <line x1="0" y1="388" x2="30" y2="388" class="svblock-pin-bus" stroke="svblock-port-in" id="port-mode"/>
+  <text x="38" y="392" text-anchor="start" class="svblock-port svblock-port-in"><title>mode</title>mode [1:0]</text>
+  <line x1="474.85" y1="368" x2="504.85" y2="368" class="svblock-pin" stroke="svblock-port-out" id="port-busy"/>
+  <text x="466.85" y="372" text-anchor="end" class="svblock-port svblock-port-out"><title>busy</title>busy</text>
+  <line x1="474.85" y1="388" x2="504.85" y2="388" class="svblock-pin" stroke="svblock-port-out" id="port-error"/>
+  <text x="466.85" y="392" text-anchor="end" class="svblock-port svblock-port-out"><title>error</title>error</text>
+  <line x1="474.85" y1="426" x2="504.85" y2="426" class="svblock-pin-bus" stroke="svblock-port-out" id="port-fifo_count"/>
+  <text x="466.85" y="430" text-anchor="end" class="svblock-port svblock-port-out"><title>fifo_count</title>fifo_count [7:0]</text>
+  <line x1="474.85" y1="446" x2="504.85" y2="446" class="svblock-pin" stroke="svblock-port-out" id="port-fifo_full"/>
+  <text x="466.85" y="450" text-anchor="end" class="svblock-port svblock-port-out"><title>fifo_full</title>fifo_full</text>
+  <line x1="474.85" y1="466" x2="504.85" y2="466" class="svblock-pin" stroke="svblock-port-out" id="port-fifo_empty"/>
+  <text x="466.85" y="470" text-anchor="end" class="svblock-port svblock-port-out"><title>fifo_empty</title>fifo_empty</text>
+  <line x1="474.85" y1="504" x2="504.85" y2="504" class="svblock-pin" stroke="svblock-port-out" id="port-irq"/>
+  <text x="466.85" y="508" text-anchor="end" class="svblock-port svblock-port-out"><title>irq</title>irq</text>
+  <line x1="474.85" y1="524" x2="504.85" y2="524" class="svblock-pin" stroke="svblock-port-out" id="port-irq_wr_done"/>
+  <text x="466.85" y="528" text-anchor="end" class="svblock-port svblock-port-out"><title>irq_wr_done</title>irq_wr_done</text>
+  <line x1="474.85" y1="544" x2="504.85" y2="544" class="svblock-pin" stroke="svblock-port-out" id="port-irq_rd_done"/>
+  <text x="466.85" y="548" text-anchor="end" class="svblock-port svblock-port-out"><title>irq_rd_done</title>irq_rd_done</text>
+  <line x1="474.85" y1="564" x2="504.85" y2="564" class="svblock-pin" stroke="svblock-port-out" id="port-irq_error"/>
+  <text x="466.85" y="568" text-anchor="end" class="svblock-port svblock-port-out"><title>irq_error</title>irq_error</text>
+</svg>

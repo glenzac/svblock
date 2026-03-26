@@ -278,7 +278,7 @@ def extract_modules(
 
     Args:
         file_path: Path to the .sv or .v file.
-        include_paths: Optional directories to search for `include files.
+        include_paths: Optional directories to search for include files.
 
     Returns:
         List of ModuleIR, one per module definition in the file.

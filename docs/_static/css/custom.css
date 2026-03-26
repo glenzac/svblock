@@ -1,0 +1,71 @@
+/* Custom styles for svblock documentation */
+
+/* SVG example containers */
+.svblock-example {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.svblock-example img,
+.svblock-example object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Side-by-side code + diagram layout */
+.svblock-demo {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin: 16px 0;
+}
+
+.svblock-demo .highlight {
+    flex: 1;
+    min-width: 0;
+}
+
+.svblock-demo .svblock-example {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .svblock-demo {
+        flex-direction: column;
+    }
+}
+
+/* Theme variable tables */
+table.theme-vars td:first-child {
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+/* Color swatch display */
+.color-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #999;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Admonition styling tweaks */
+.admonition.tip .admonition-title {
+    font-weight: bold;
+}
+
+/* Decorator legend list */
+.decorator-legend dt {
+    font-weight: bold;
+    font-family: monospace;
+}
