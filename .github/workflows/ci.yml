@@ -44,13 +44,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev,sphinx]"
+          pip install -e ".[dev]"
 
       - name: Type check with mypy
-        run: |
-          echo "=== mypy version ==="
-          mypy --version
-          echo "=== running mypy ==="
-          mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/' 2>&1 || true
-          echo "=== exit code: $? ==="
-          mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/'
+        run: mypy src/svblock/ --ignore-missing-imports --exclude 'sphinx_ext/'
