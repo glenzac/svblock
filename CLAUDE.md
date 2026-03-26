@@ -9,18 +9,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Run Commands
 
 ```bash
-# Install (once packaging is set up)
-pip install -e .
+# Install in development mode
+pip install -e ".[dev]"
 
 # CLI entry point
 svblock INPUT_FILE.sv                          # render first module as SVG
 svblock INPUT_FILE.sv -m module_name           # specific module
-svblock INPUT_FILE.sv --theme dark -f png      # dark theme, PNG output
+svblock INPUT_FILE.sv --theme dark -f png      # dark theme, PNG output (requires cairosvg)
 svblock INPUT_FILE.sv --list-modules           # list all modules in file
 
-# Tests (pytest with snapshot testing)
-pytest
-pytest tests/test_parser.py -k test_name      # single test
+# Tests
+pytest                                         # all 174 tests
+pytest tests/test_parser.py -k test_name       # single test
+pytest tests/test_e2e.py                       # E2E snapshot tests
+
+# Lint
+ruff check src/ tests/
+
+# Regenerate golden SVG snapshots
+python tests/update_snapshots.py
 ```
 
 ## Architecture
@@ -33,7 +40,7 @@ Four-stage pipeline: **Parse → Module IR → Layout → SVG Render**
 4. **Renderer** (`svblock/renderer/`): Pure Python SVG string generation with CSS variable theming
 
 Supporting modules:
-- `svblock/exporters/` — PNG/PDF wrappers (optional deps: `svglib`/`cairosvg`)
+- `svblock/exporters/` — PNG/PDF wrappers (optional dep: `cairosvg`)
 - `svblock/sphinx_ext/` — `.. svblock::` Sphinx directive
 - `svblock/config.py` — YAML/TOML style configuration loader
 
@@ -49,7 +56,7 @@ Supporting modules:
 
 - Python 3.10+
 - `pyslang` — SystemVerilog parsing
-- Optional: `fonttools` (text metrics), `svglib`/`cairosvg` (PNG/PDF), `Sphinx` (docs directive), `Jinja2` (SVG templates)
+- Optional: `cairosvg` (PNG/PDF export), `Sphinx` (docs directive)
 
 ## Testing
 
