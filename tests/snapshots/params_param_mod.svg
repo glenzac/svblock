@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="120" viewBox="0 0 300 120" class="svblock">
+<svg xmlns="http://www.w3.org/2000/svg" width="301.5" height="121.5" viewBox="-0.75 -0.75 301.5 121.5" class="svblock">
     <style>
       :root {
       --sym-bg: #ffffff;
@@ -29,7 +29,8 @@
       .svblock-group-label { font-family: sans-serif; font-size: 11px; fill: var(--sym-group-text); text-anchor: middle; }
     </style>
   <rect x="30" y="0" width="240" height="120" class="svblock-box"/>
-  <rect x="30" y="0" width="240" height="100" class="svblock-header" stroke="var(--sym-border)" stroke-width="0.5"/>
+  <rect x="30" y="0" width="240" height="100" class="svblock-header"/>
+  <line x1="30" y1="100" x2="270" y2="100" stroke="var(--sym-border)" stroke-width="0.5"/>
   <text x="150" y="22" text-anchor="middle" class="svblock-name" id="module-param_mod">param_mod</text>
   <text x="150" y="36" text-anchor="middle" class="svblock-param" id="param-WIDTH">int WIDTH = 8</text>
   <text x="150" y="52" text-anchor="middle" class="svblock-param" id="param-T">type T</text>
@@ -37,5 +38,5 @@
   <text x="150" y="84" text-anchor="middle" class="svblock-param" id="param-DEPTH">int DEPTH = 16</text>
   <line x1="0" y1="110" x2="30" y2="110" class="svblock-pin" stroke="svblock-port-in" id="port-clk"/>
   <text x="38" y="114" text-anchor="start" class="svblock-port svblock-port-in"><title>clk</title>clk</text>
-  <polygon points="32,104 38,110 32,116" fill="none" stroke="currentColor" stroke-width="1"/>
+  <polygon points="30,104 36,110 30,116" fill="none" stroke="currentColor" stroke-width="1"/>
 </svg>

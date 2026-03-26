@@ -2,16 +2,16 @@
     <style>
       :root {
       --sym-bg: #ffffff;
-      --sym-border: #333333;
-      --sym-text: #111111;
-      --sym-pin-input: #1a6db5;
-      --sym-pin-output: #b52a1a;
-      --sym-pin-inout: #6a2ab5;
-      --sym-pin-iface: #1a9e55;
-      --sym-group-bg: #f0f0f0;
-      --sym-group-text: #555555;
+      --sym-border: #444444;
+      --sym-text: #222222;
+      --sym-pin-input: #444444;
+      --sym-pin-output: #444444;
+      --sym-pin-inout: #444444;
+      --sym-pin-iface: #444444;
+      --sym-group-bg: #f5f5f5;
+      --sym-group-text: #666666;
       --sym-bus-stroke: 3;
-      --sym-header-bg: #e8e8e8;
+      --sym-header-bg: #eeeeee;
       --sym-param-text: #666666;
       }
       .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
