@@ -13,6 +13,11 @@
       --sym-bus-stroke: 3;
       --sym-header-bg: #e8e8e8;
       --sym-param-text: #666666;
+      --sym-arrow: #555555;
+      --sym-instance-bg: #f8f8f8;
+      --sym-instance-border: #333333;
+      --sym-parent-border: #999999;
+      --sym-parent-bg: #ffffff;
       }
       .svblock-box { fill: var(--sym-bg); stroke: var(--sym-border); stroke-width: 1.5; }
       .svblock-header { fill: var(--sym-header-bg); }

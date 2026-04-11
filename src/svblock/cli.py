@@ -9,9 +9,16 @@ from pathlib import Path
 
 from svblock import __version__
 from svblock.config import load_theme
+from svblock.layout.block_layout import BlockLayoutConfig, compute_block_layout
 from svblock.layout.engine import LayoutConfig, compute_layout
 from svblock.layout.grouping import apply_grouping
-from svblock.parser import ParseError, extract_module, extract_modules
+from svblock.parser import (
+    ParseError,
+    extract_block_diagram,
+    extract_module,
+    extract_modules,
+)
+from svblock.renderer.block_renderer import render_block_svg
 from svblock.renderer.svg_renderer import RenderOptions, render_svg
 
 
@@ -84,6 +91,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Output Sphinx-compatible SVG (standalone=false)",
     )
     parser.add_argument(
+        "--block-diagram",
+        action="store_true",
+        help="Render block diagram showing nested module instantiations",
+    )
+    parser.add_argument(
+        "--show-parent-ports",
+        action="store_true",
+        help="Show parent I/O ports on block diagram boundary "
+             "(used with --block-diagram)",
+    )
+    parser.add_argument(
         "-v", "--verbose",
         action="store_true",
         help="Show parse diagnostics",
@@ -115,6 +133,9 @@ def _process_file(input_file: str, args: argparse.Namespace) -> int:
     if not path.exists():
         print(f"File not found: {input_file}", file=sys.stderr)
         return 1
+
+    if args.block_diagram:
+        return _process_block_diagram(path, args)
 
     # Parse
     try:
@@ -172,6 +193,44 @@ def _process_file(input_file: str, args: argparse.Namespace) -> int:
     fmt = args.format
     output_path = args.output or f"{module.name}.{fmt}"
 
+    return _write_output(svg_output, output_path, fmt, args.verbose)
+
+
+def _process_block_diagram(path: Path, args: argparse.Namespace) -> int:
+    """Process a file in block diagram mode."""
+    try:
+        ir = extract_block_diagram(path, module_name=args.module)
+    except ParseError as e:
+        print(f"Parse error: {e}", file=sys.stderr)
+        return 2
+
+    if not ir.instances:
+        print(
+            f"No module instantiations found in '{ir.parent_name}'",
+            file=sys.stderr,
+        )
+        return 2
+
+    config = BlockLayoutConfig(show_parent_ports=args.show_parent_ports)
+    layout = compute_block_layout(ir, config)
+
+    theme = load_theme(args.theme)
+    svg_output = render_block_svg(
+        layout,
+        theme,
+        standalone=not args.sphinx,
+    )
+
+    fmt = args.format
+    output_path = args.output or f"{ir.parent_name}_block.{fmt}"
+
+    return _write_output(svg_output, output_path, fmt, args.verbose)
+
+
+def _write_output(
+    svg_output: str, output_path: str, fmt: str, verbose: bool,
+) -> int:
+    """Write SVG/PNG/PDF output to a file."""
     if fmt == "svg":
         Path(output_path).write_text(svg_output, encoding="utf-8")
     elif fmt == "png":
@@ -189,7 +248,7 @@ def _process_file(input_file: str, args: argparse.Namespace) -> int:
             print(str(e), file=sys.stderr)
             return 1
 
-    if args.verbose:
+    if verbose:
         print(f"Wrote {output_path}", file=sys.stderr)
 
     return 0
