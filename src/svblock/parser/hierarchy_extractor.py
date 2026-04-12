@@ -44,7 +44,7 @@ def _get_net_name(expr: object) -> str | None:
 
 def _extract_instances_from_syntax(body: object) -> list[tuple[str, str]]:
     """Extract (instance_name, module_type) pairs from the syntax JSON."""
-    syntax = body.syntax  # type: ignore[union-attr]
+    syntax = body.syntax  # type: ignore[attr-defined]
     if syntax is None:
         return []
 
@@ -93,7 +93,7 @@ def _build_connectivity(
     parent_port_dir_map: dict[str, PortDirection] = {}
 
     for iname, _mtype in instance_names:
-        child = body.find(iname)  # type: ignore[union-attr]
+        child = body.find(iname)  # type: ignore[attr-defined]
         if child is None or not hasattr(child, "portConnections"):
             continue
 
@@ -144,7 +144,7 @@ def _build_connectivity(
     # Derive parent port connections
     parent_port_instances: dict[str, list[str]] = {}
 
-    for port in body.portList:  # type: ignore[union-attr]
+    for port in body.portList:  # type: ignore[attr-defined]
         pname = port.name
         pdir = _DIRECTION_MAP.get(port.direction, PortDirection.INPUT)
         parent_port_dir_map[pname] = pdir
