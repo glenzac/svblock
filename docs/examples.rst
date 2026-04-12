@@ -226,3 +226,35 @@ characteristics:
      - Port direction is ``inout``
 
 All decorators can be suppressed with ``--no-decorators``.
+
+Block Diagram
+-------------
+
+With ``--block-diagram``, svblock renders the internal structure of a module
+instead of its pin interface. Child instances appear as boxes with arrows
+showing connectivity. See :doc:`block-diagrams` for full documentation.
+
+.. code-block:: systemverilog
+
+   module top(
+       input  logic        clk,
+       input  logic [7:0]  x,
+       output logic [7:0]  y
+   );
+       logic [7:0] a_to_c, b_to_c;
+
+       mod_a u_a(.clk(clk), .data_in(x),     .data_out(a_to_c));
+       mod_b u_b(.clk(clk), .b_in(x),        .b_out(b_to_c));
+       mod_c u_c(.clk(clk), .c_in1(a_to_c),  .c_in2(b_to_c), .c_out(y));
+   endmodule
+
+.. raw:: html
+
+   <div class="svblock-example">
+
+.. image:: _static/examples/block_simple.svg
+   :alt: Block diagram showing three interconnected modules
+
+.. raw:: html
+
+   </div>

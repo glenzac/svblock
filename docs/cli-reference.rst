@@ -91,6 +91,23 @@ Options
        spi_master
        soc_top
 
+``--block-diagram``
+    Render a block diagram showing the module's internal structure -- child
+    instances as boxes with directional arrows for connectivity. See
+    :doc:`block-diagrams` for details.
+
+    .. code-block:: bash
+
+       svblock soc_top.sv --block-diagram -m soc_top
+
+``--show-parent-ports``
+    When used with ``--block-diagram``, display the parent module's I/O ports
+    on the outer boundary with dashed lines to connected child instances.
+
+    .. code-block:: bash
+
+       svblock soc_top.sv --block-diagram --show-parent-ports -m soc_top
+
 ``--sphinx``
     Produce Sphinx-compatible SVG output (no ``xmlns`` attribute on the root
     ``<svg>`` element). Intended for use by the Sphinx extension internally.
@@ -138,3 +155,9 @@ Minimal diagram with no extras:
 .. code-block:: bash
 
    svblock fifo.sv --no-params --no-groups --no-decorators
+
+Block diagram of a top-level module:
+
+.. code-block:: bash
+
+   svblock soc_top.sv --block-diagram -m soc_top --theme dark -o soc_block.svg

@@ -27,6 +27,8 @@ Features
   heuristic fallback
 - **Pin decorators**: clock triangle, active-low bubble, bus thick stroke,
   interface diamond, inout arrow
+- **Block diagrams**: visualize nested module instantiations with directional
+  arrows showing connectivity
 - **4 built-in themes**: default, dark, minimal, print -- plus custom TOML/YAML themes
 - **Deterministic SVG** output safe for version control and PR diffing
 - Optional **PNG/PDF** export via ``cairosvg``
@@ -38,6 +40,7 @@ Features
 
    getting-started
    cli-reference
+   block-diagrams
    port-grouping
    themes
    examples

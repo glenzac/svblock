@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="655.2" height="290" viewBox="0 0 655.2 290">
+    <style>
+      :root {
+      --sym-arrow: #555555;
+      --sym-instance-bg: #f8f8f8;
+      --sym-instance-border: #333333;
+      --sym-parent-border: #999999;
+      --sym-parent-bg: #ffffff;
+      --sym-bg: #ffffff;
+      --sym-border: #333333;
+      --sym-text: #111111;
+      --sym-pin-input: #1a6db5;
+      --sym-pin-output: #b52a1a;
+      --sym-pin-inout: #6a2ab5;
+      --sym-pin-iface: #1a9e55;
+      --sym-group-bg: #f0f0f0;
+      --sym-group-text: #555555;
+      --sym-bus-stroke: 3;
+      --sym-header-bg: #e8e8e8;
+      --sym-param-text: #666666;
+      }
+      .svblock-block-parent { fill: var(--sym-parent-bg); stroke: var(--sym-parent-border); stroke-width: 2; stroke-dasharray: 8,4; }
+      .svblock-block-instance { fill: var(--sym-instance-bg); stroke: var(--sym-instance-border); stroke-width: 1.5; rx: 4; ry: 4; }
+      .svblock-block-instance-label { font-family: sans-serif; font-size: 13px; fill: var(--sym-text); text-anchor: middle; dominant-baseline: central; }
+      .svblock-block-module-label { font-family: monospace; font-size: 11px; fill: var(--sym-param-text); text-anchor: middle; dominant-baseline: central; }
+      .svblock-block-parent-label { font-family: sans-serif; font-size: 16px; font-weight: bold; fill: var(--sym-text); }
+      .svblock-block-arrow { stroke: var(--sym-arrow); fill: none; }
+      .svblock-block-port-label { font-family: monospace; font-size: 12px; fill: var(--sym-text); }
+      .svblock-block-port-line { stroke: var(--sym-arrow); stroke-width: 1.5; stroke-dasharray: 6,3; }
+    </style>
+    <defs>
+      <marker id="arrow-end" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L10,4 L0,8 Z" fill="#555555"/>
+      </marker>
+      <marker id="arrow-start" markerWidth="10" markerHeight="8" refX="1" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M10,0 L0,4 L10,8 Z" fill="#555555"/>
+      </marker>
+      <marker id="port-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L8,3 L0,6 Z" fill="#555555"/>
+      </marker>
+    </defs>
+    <rect class="svblock-block-parent" x="0" y="0" width="620" height="290" rx="6" ry="6"/>
+    <text class="svblock-block-parent-label" x="12" y="20">top</text>
+    <rect class="svblock-block-instance" id="inst-u_a" x="120" y="90" width="140" height="50"/>
+    <text class="svblock-block-instance-label" x="190" y="108">u_a</text>
+    <text class="svblock-block-module-label" x="190" y="124">mod_a</text>
+    <rect class="svblock-block-instance" id="inst-u_b" x="120" y="180" width="140" height="50"/>
+    <text class="svblock-block-instance-label" x="190" y="198">u_b</text>
+    <text class="svblock-block-module-label" x="190" y="214">mod_b</text>
+    <rect class="svblock-block-instance" id="inst-u_c" x="360" y="135" width="140" height="50"/>
+    <text class="svblock-block-instance-label" x="430" y="153">u_c</text>
+    <text class="svblock-block-module-label" x="430" y="169">mod_c</text>
+    <line class="svblock-block-arrow" x1="260" y1="115" x2="360" y2="160" stroke-width="3" marker-end="url(#arrow-end)"/>
+    <line class="svblock-block-arrow" x1="260" y1="205" x2="360" y2="160" stroke-width="3" marker-end="url(#arrow-end)"/>
+    <line class="svblock-block-port-line" x1="0" y1="96.67" x2="120" y2="115" marker-end="url(#port-arrow)"/>
+    <text class="svblock-block-port-label" x="-5" y="96.67" text-anchor="end" dominant-baseline="central">clk</text>
+    <line class="svblock-block-port-line" x1="0" y1="193.33" x2="120" y2="115" marker-end="url(#port-arrow)"/>
+    <text class="svblock-block-port-label" x="-5" y="193.33" text-anchor="end" dominant-baseline="central">x</text>
+    <line class="svblock-block-port-line" x1="500" y1="160" x2="620" y2="145" marker-end="url(#port-arrow)"/>
+    <text class="svblock-block-port-label" x="625" y="145" text-anchor="start" dominant-baseline="central">y</text>
+</svg>
