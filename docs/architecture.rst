@@ -118,6 +118,59 @@ string concatenation (no template engine). It generates:
 This makes the SVG output safe for version control -- diffs will only show
 meaningful changes.
 
+Block Diagram Pipeline
+----------------------
+
+In addition to the pin diagram pipeline, svblock has a parallel pipeline for
+rendering block diagrams that show nested module instantiations:
+
+.. code-block:: text
+
+   .sv file --> Hierarchy Extract --> Block IR --> Block Layout --> Block SVG
+
+This pipeline shares the same pyslang compilation and theme infrastructure but
+uses its own data structures and layout engine:
+
+Stage 1: Hierarchy Extractor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Module:** ``svblock.parser.hierarchy_extractor``
+
+Extracts child module instances and their port connections from the elaborated
+design. For each instance, it resolves which internal nets connect output ports
+of one instance to input ports of another. The result is a connectivity graph
+with directional edges.
+
+Stage 2: Block Diagram IR
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Module:** ``svblock.model.block_ir``
+
+Three dataclasses:
+
+- ``InstanceDef`` -- an instance with its name and module type
+- ``ConnectionDef`` -- a directed or bidirectional edge between two instances
+- ``BlockDiagramIR`` -- the complete block diagram with instances, connections,
+  and parent port associations
+
+Stage 3: Block Layout
+~~~~~~~~~~~~~~~~~~~~~
+
+**Module:** ``svblock.layout.block_layout``
+
+Positions instance boxes in topologically-ordered columns (sources left, sinks
+right), computes arrow endpoints between box edges, and optionally places parent
+port stubs on the outer boundary.
+
+Stage 4: Block SVG Renderer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Module:** ``svblock.renderer.block_renderer``
+
+Generates SVG with: a dashed parent boundary rectangle, solid instance boxes
+with labels, thick directional arrows using SVG ``<marker>`` definitions, and
+optional parent port stub lines.
+
 Supporting Modules
 ------------------
 
@@ -158,17 +211,21 @@ Directory Structure
    +-- config.py                # Theme loading (TOML/YAML)
    +-- py.typed                 # PEP 561 marker
    +-- parser/
-   |   +-- sv_extractor.py      # pyslang wrapper
+   |   +-- sv_extractor.py      # pyslang wrapper (pin diagrams)
+   |   +-- hierarchy_extractor.py  # Hierarchy extraction (block diagrams)
    |   +-- annotation.py        # @sym comment parser
    +-- model/
    |   +-- port_types.py        # PortDirection enum
    |   +-- module_ir.py         # ModuleIR, PortDef, ParamDef
+   |   +-- block_ir.py          # BlockDiagramIR, InstanceDef, ConnectionDef
    +-- layout/
    |   +-- engine.py            # Box geometry & pin coordinates
+   |   +-- block_layout.py      # Block diagram layout engine
    |   +-- grouping.py          # Heuristic & annotation grouping
    |   +-- text_metrics.py      # Font width estimation
    +-- renderer/
-   |   +-- svg_renderer.py      # SVG string generation
+   |   +-- svg_renderer.py      # Pin diagram SVG generation
+   |   +-- block_renderer.py    # Block diagram SVG generation
    |   +-- themes.py            # Built-in theme definitions
    +-- exporters/
    |   +-- png.py               # cairosvg PNG wrapper
